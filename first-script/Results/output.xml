@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 3.0.4 (Python 3.6.5 on win32)" generated="20180516 15:22:16.660">
+<suite id="s1" name="ApiTests" source="C:\development\robot-scripts\first-script\Tests\ApiTests.robot">
+<test id="s1-t1" name="display emoji from github">
+<kw name="Display Emoji" library="Github">
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>my_github_session</arg>
+<arg>https://api.github.com</arg>
+</arguments>
+<msg timestamp="20180516 15:22:17.024" level="INFO">Creating Session using : alias=my_github_session, url=https://api.github.com, headers={},                     cookies=None, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20180516 15:22:17.024" endtime="20180516 15:22:17.024"></status>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the</doc>
+<arguments>
+<arg>my_github_session</arg>
+<arg>emojis</arg>
+</arguments>
+<assign>
+<var>${response}</var>
+</assign>
+<msg timestamp="20180516 15:22:18.094" level="INFO">Get Request using : alias=my_github_session, uri=emojis, headers=None json=None</msg>
+<msg timestamp="20180516 15:22:18.095" level="INFO">c:\program files\python36\lib\site-packages\urllib3\connectionpool.py:858: InsecureRequestWarning: Unverified HTTPS request is being made. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  InsecureRequestWarning)</msg>
+<msg timestamp="20180516 15:22:18.096" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20180516 15:22:17.024" endtime="20180516 15:22:18.096"></status>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<arguments>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+</arguments>
+<msg timestamp="20180516 15:22:18.098" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20180516 15:22:18.097" endtime="20180516 15:22:18.098"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${response.json()}</arg>
+</arguments>
+<assign>
+<var>${json}</var>
+</assign>
+<msg timestamp="20180516 15:22:18.106" level="INFO">${json} = {'+1': 'https://assets-cdn.github.com/images/icons/emoji/unicode/1f44d.png?v8', '-1': 'https://assets-cdn.github.com/images/icons/emoji/unicode/1f44e.png?v8', '100': 'https://assets-cdn.github.com/ima...</msg>
+<status status="PASS" starttime="20180516 15:22:18.098" endtime="20180516 15:22:18.107"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${ json['aerial_tramway']}</arg>
+</arguments>
+<assign>
+<var>${emoji_url}</var>
+</assign>
+<msg timestamp="20180516 15:22:18.109" level="INFO">${emoji_url} = https://assets-cdn.github.com/images/icons/emoji/unicode/1f6a1.png?v8</msg>
+<status status="PASS" starttime="20180516 15:22:18.107" endtime="20180516 15:22:18.109"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${json['romania']}</arg>
+</arguments>
+<assign>
+<var>${emoji_romania}</var>
+</assign>
+<msg timestamp="20180516 15:22:18.110" level="INFO">${emoji_romania} = https://assets-cdn.github.com/images/icons/emoji/unicode/1f1f7-1f1f4.png?v8</msg>
+<status status="PASS" starttime="20180516 15:22:18.109" endtime="20180516 15:22:18.110"></status>
+</kw>
+<kw name="Open Browser" library="SeleniumLibrary">
+<doc>Opens a new browser instance to the given ``url``.</doc>
+<arguments>
+<arg>${emoji_url}</arg>
+<arg>firefox</arg>
+</arguments>
+<msg timestamp="20180516 15:22:18.111" level="INFO">Opening browser 'firefox' to base url 'https://assets-cdn.github.com/images/icons/emoji/unicode/1f6a1.png?v8'.</msg>
+<status status="PASS" starttime="20180516 15:22:18.111" endtime="20180516 15:22:24.678"></status>
+</kw>
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20180516 15:22:24.678" endtime="20180516 15:22:25.587"></status>
+</kw>
+<kw name="Open Browser" library="SeleniumLibrary">
+<doc>Opens a new browser instance to the given ``url``.</doc>
+<arguments>
+<arg>${emoji_romania}</arg>
+<arg>firefox</arg>
+</arguments>
+<msg timestamp="20180516 15:22:25.588" level="INFO">Opening browser 'firefox' to base url 'https://assets-cdn.github.com/images/icons/emoji/unicode/1f1f7-1f1f4.png?v8'.</msg>
+<status status="PASS" starttime="20180516 15:22:25.587" endtime="20180516 15:22:32.120"></status>
+</kw>
+<status status="PASS" starttime="20180516 15:22:17.024" endtime="20180516 15:22:32.120"></status>
+</kw>
+<tags>
+<tag>API</tag>
+</tags>
+<status status="PASS" starttime="20180516 15:22:17.023" endtime="20180516 15:22:32.122" critical="yes"></status>
+</test>
+<doc>these are some api tests</doc>
+<status status="PASS" starttime="20180516 15:22:16.663" endtime="20180516 15:22:32.135"></status>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0">Critical Tests</stat>
+<stat pass="1" fail="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="1" fail="0">API</stat>
+</tag>
+<suite>
+<stat pass="1" fail="0" id="s1" name="ApiTests">ApiTests</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
